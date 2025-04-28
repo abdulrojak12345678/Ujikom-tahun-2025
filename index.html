@@ -72,7 +72,12 @@
       window.location.replace('ubahtugas.html?docId=' + $(this).attr('data'));
 
     });
-
+    // Ubah status
+    $('.btn-status').click(async function () {
+      const id = $(this).attr('data-id');
+      const statusSekarang = $(this).attr('data-status');
+      console.log('status saat ini', statusSekarang);
+      const statusBaru = 'selesai'; 
 
   </script>
 </body>
