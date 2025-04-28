@@ -68,7 +68,16 @@ async function init() {
   const docId = parameterURL.get('docId');
 
   const Absensi = await ambiltugas(docId);
-  
+  tombolubah.addEventListener('click', async function (el) {
+    el.preventDefault();
+    await ubahtugas(docId, elementugas.value, elemenstatus.value, elemenprioritas.value, elementanggal.value);
+    window.location.href = 'index.html';
+  });
+}
+
+init();
+
+    </script>
 </body>
 
 
