@@ -43,4 +43,12 @@ export async function ambildaftartugas() {
 
   return hasil;
 }
-// untuk menambahkan daftar tugas dab di update kw 
+// untuk menghapus daftar tugas dab di update kw 
+ export async function hapustugas(docId) {
+  await deleteDoc(doc(db, "to-di-list", docId));
+}
+ // Event listener untuk hapus tugas
+  $(".tombol-hapus").click(async function () {
+    await hapustugas($(this).attr("data-id"));
+    location.reload();
+  });
