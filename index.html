@@ -62,6 +62,17 @@
       );
       nomor++;
     });
+    <-tombol hapus->
+('.tombol-hapus').click(async function () {
+      await hapustugas($(this).attr('data'));
+      location.reload();
+    });
+        // Ubah
+    $('.ubah').click(function () {
+      window.location.replace('ubahtugas.html?docId=' + $(this).attr('data'));
+
+    });
+
 
   </script>
 </body>
