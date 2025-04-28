@@ -78,6 +78,13 @@
       const statusSekarang = $(this).attr('data-status');
       console.log('status saat ini', statusSekarang);
       const statusBaru = 'selesai'; 
+      console.log('status baru', statusBaru);
+      if (statusSekarang !== 'selesai') {console.log('status saat ini', statusSekarang);
+        await ubahStatusTugas(id, statusBaru);
+     location.reload();
+      }
+    });
+  });
 
   </script>
 </body>
