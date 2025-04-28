@@ -44,7 +44,34 @@ export async function ambildaftartugas() {
 
   return hasil;
 }
-
+// untuk menambahkan daftar tugas dab di update kw firebase
+export async function tambahtugas(tugas, status, prioritas, tanggal) {
+  try {
+    const dokRef = await addDoc(collection(db, 'to-di-list'), {
+      tugas: tugas,
+      status: status,
+      prioritas: prioritas,
+      tanggal: tanggal,
+    });
+    console.log('berhasil menembah tugas ' + dokRef.id);
+  } catch (e) {
+    console.log('gagal menambah tugas ' + e);
+  }
+}
+// untuk menambahkan daftar tugas dab di update kw firebase
+export async function tambahtugas(tugas, status, prioritas, tanggal) {
+  try {
+    const dokRef = await addDoc(collection(db, 'to-di-list'), {
+      tugas: tugas,
+      status: status,
+      prioritas: prioritas,
+      tanggal: tanggal,
+    });
+    console.log('berhasil menembah tugas ' + dokRef.id);
+  } catch (e) {
+    console.log('gagal menambah tugas ' + e);
+  }
+}
 
 
 
