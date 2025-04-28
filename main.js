@@ -104,8 +104,27 @@ $(document).ready(async function () {
   $(".ubah").click(async function () {
     window.location.replace("ubahtugas.html?docId=" + $(this).attr("data-id"));
   });
+// Gunakan event delegation agar berfungsi pada elemen dinamis
+$(document).on("click", ".btn-status", function () {
+  let tugasId = $(this).attr("data-id");
+  let statusSekarang = $(this).attr("data-status");
+  let statusBaru;
 
+  if (statusSekarang === "Belum Selesai") {
+    statusBaru = "Selesai";
+  } else {
+    statusBaru = "Belum Selesai";
+  }
 
+  // Update tampilan tombol
+  $(this).attr("data-status", statusBaru);
+  $(this).text(statusBaru);
+  updateWarnaStatus($(this), statusBaru);
+
+  // Tambahkan kode AJAX jika ingin menyimpan perubahan status ke database
+  console.log(`Status tugas ID ${tugasId} diubah menjadi ${statusBaru}`);
+  
+});
 
 
 
