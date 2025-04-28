@@ -24,10 +24,32 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-// untuk mengexport daftar tugas ke firebase
-export async function ambiltugas(docId) {
-  const docRef = await doc(db, "to-di-list", docId);
-  const docSnap = await getDoc(docRef);
 
-  return await docSnap.data();
+// untuk mengexport ke firebase
+export async function ambildaftartugas() {
+  const refDokumen = collection(db, "to-di-list");
+  const kueri = query(refDokumen, orderBy("tugas"));
+  const cuplikankueri = await getDocs(kueri);
+
+  let hasil = [];
+  cuplikankueri.forEach((dok) => {
+    hasil.push({
+      id: dok.id,
+      tugas: dok.data().tugas,
+      status: dok.data().status,
+      prioritas: dok.data().prioritas,
+      tanggal: dok.data().tanggal,
+    });
+  });
+
+  return hasil;
 }
+
+
+
+
+
+
+
+
+
