@@ -72,6 +72,9 @@ export async function tambahtugas(tugas, status, prioritas, tanggal) {
     console.log('gagal menambah tugas ' + e);
   }
 }
+export async function hapustugas(docId) {
+  await deleteDoc(doc(db, "to-di-list", docId));
+}
 
 // untuk mengabil daftar tugas ntuk ditampilkan 
 $(document).ready(async function () {
