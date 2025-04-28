@@ -24,7 +24,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 // untuk mengexport ke firebase
 export async function ambildaftartugas() {
   const refDokumen = collection(db, "to-di-list");
@@ -44,110 +43,4 @@ export async function ambildaftartugas() {
 
   return hasil;
 }
-// untuk menambahkan daftar tugas dab di update kw firebase
-export async function tambahtugas(tugas, status, prioritas, tanggal) {
-  try {
-    const dokRef = await addDoc(collection(db, 'to-di-list'), {
-      tugas: tugas,
-      status: status,
-      prioritas: prioritas,
-      tanggal: tanggal,
-    });
-    console.log('berhasil menembah tugas ' + dokRef.id);
-  } catch (e) {
-    console.log('gagal menambah tugas ' + e);
-  }
-}
-// untuk menambahkan daftar tugas dab di update kw firebase
-export async function tambahtugas(tugas, status, prioritas, tanggal) {
-  try {
-    const dokRef = await addDoc(collection(db, 'to-di-list'), {
-      tugas: tugas,
-      status: status,
-      prioritas: prioritas,
-      tanggal: tanggal,
-    });
-    console.log('berhasil menembah tugas ' + dokRef.id);
-  } catch (e) {
-    console.log('gagal menambah tugas ' + e);
-  }
-}
-export async function hapustugas(docId) {
-  await deleteDoc(doc(db, "to-di-list", docId));
-}
-// untuk mengubah status
-function ubahStatus(tombol) {
-  let status = tombol.dataset.status;
-
-  if (status === "Selesai") {
-    tombol.textContent = "Belum Selesai";
-    tombol.dataset.status = "Belum Selesai";
-  } else {
-    tombol.textContent = "Selesai";
-    tombol.dataset.status = "Selesai";
-  }
-}
-
-// untuk mengabil daftar tugas ntuk ditampilkan 
-$(document).ready(async function () {
-  let elemenDaftar = $("#daftar-tugas > thead");
-  let daftartugas = await ambildaftartugas();
-  let nomor = 1;
-  
-// Event listener untuk hapus tugas
-  $(".tombol-hapus").click(async function () {
-    await hapustugas($(this).attr("data-id"));
-    location.reload();
-  });
-
-  // Event listener untuk ubah tugas
-  $(".ubah").click(async function () {
-    window.location.replace("ubahtugas.html?docId=" + $(this).attr("data-id"));
-  });
-// Gunakan event delegation agar berfungsi pada elemen dinamis
-$(document).on("click", ".btn-status", function () {
-  let tugasId = $(this).attr("data-id");
-  let statusSekarang = $(this).attr("data-status");
-  let statusBaru;
-
-  if (statusSekarang === "Belum Selesai") {
-    statusBaru = "Selesai";
-  } else {
-    statusBaru = "Belum Selesai";
-  }
-
-  // Update tampilan tombol
-  $(this).attr("data-status", statusBaru);
-  $(this).text(statusBaru);
-  updateWarnaStatus($(this), statusBaru);
-
-  // Tambahkan kode AJAX jika ingin menyimpan perubahan status ke database
-  console.log(`Status tugas ID ${tugasId} diubah menjadi ${statusBaru}`);
-  
-});
-
-// Fungsi untuk memperbarui warna tombol berdasarkan status
-function updateWarnaStatus(button, status) {
-  if (status === "Belum Selesai") {
-    button.css("background-color", "#dc3545").css("color", "white");
-  } else if (status === "Selesai") {
-    button.css("background-color", "#ffc107").css("color", "black");
-  } else {
-    button.css("background-color", "#28a745").css("color", "white");
-  }
-}
-
-// Atur warna status setelah halaman dimuat
-$(document).ready(function () {
-  $(".btn-status").each(function () {
-    updateWarnaStatus($(this), $(this).attr("data-status"));
-  });
-});
-export async function ubahStatusTugas(id, statusBaru) {
-//  const db = firebase.firestore(); // atau sesuai dengan cara kamu ambil DB
-  await updateDoc(doc(db, "to-di-list", id), {
-      status: statusBaru,
-  });
-}
-
-
+// untuk menambahkan daftar tugas dab di update kw 

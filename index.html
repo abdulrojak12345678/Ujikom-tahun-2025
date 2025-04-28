@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!DOCTYPE html>
+ <html lang="en">
 
-  <title>TO DO LIST</title>
-  
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+ <head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <title>To-Do List</title>
+
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
@@ -15,9 +16,12 @@
 
    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="style.css">
-</head>
- <style>
+   <link rel="stylesheet" href="style.css">
+ </head>
+
+ <body>
+
+     <style>
      <---->
     body {
       font-family: Arial, sans-serif;
@@ -39,22 +43,29 @@
     }
     
     body {
-      background-color: seashell;
+      background-color: aliceblue;
     }
     
     h1 {
       color: black;
     }
   </style>
-<header>
+   <header>
      
    <img src="gambar.png" alt="Gambar Header" class="header-image"/>
     
    </header>
-<body>
-  <h1>
+
+   <h1>
      tugas harian siswa smk plus insan cemerlang 
    </h1>
+   <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="fanjusllse">
+    menu
+  </button>
+  <ul class="dropdown-menu dropdown-menu-dark">
+    <li><a class="dropdown-item active" href="tambah.html">Tambah tugas</a></li>
+</div>
    <table class="table" id="daftar-tugas">
      <thead>
        <tr>
@@ -69,10 +80,10 @@
      </thead>
    </table>
    
-  <!-- Project -->
-  <script type="module">
-    import { ambildaftartugas, hapustugas, ubahStatusTugas } from './main.js';
-    $(document).ready(async function () {
+<script type="module">
+  import { ambildaftartugas } from './main.js';
+
+  $(document).ready(async function () {
     let elemenDaftar = $("#daftar-tugas > thead");
     let daftartugas = await ambildaftartugas();
 
@@ -99,36 +110,21 @@
       );
       nomor++;
     });
-  
-$('.tombol-hapus').click(async function () {
-      await hapustugas($(this).attr('data'));
-      location.reload();
-    });
-        // Ubah
-    $('.ubah').click(function () {
-      window.location.replace('ubahtugas.html?docId=' + $(this).attr('data'));
-
-    });
-    // Ubah status
-    $('.btn-status').click(async function () {
-      const id = $(this).attr('data-id');
-      const statusSekarang = $(this).attr('data-status');
-      console.log('status saat ini', statusSekarang);
-      const statusBaru = 'selesai'; 
-      console.log('status baru', statusBaru);
-      if (statusSekarang !== 'selesai') {console.log('status saat ini', statusSekarang);
-        await ubahStatusTugas(id, statusBaru);
-     location.reload();
-      }
-    });
   });
-  </script>
-  
-    <footer class="py-3 bg-dark-subtle mt-auto">
+</script>
+
+   
+  <footer class="py-3 bg-dark-subtle mt-auto">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+
       </ul>
       <p class="text-center text-body-secondary">&copy; SMK PLUS INSAN CEMERLANG 2024
         # to-do-list </p>
     </footer>
-</body>
-</html>
+    
+
+
+
+ </body>
+
+ </html>
