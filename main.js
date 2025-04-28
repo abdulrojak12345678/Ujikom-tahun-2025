@@ -88,16 +88,23 @@ function ubahStatus(tombol) {
   }
 }
 
-
 // untuk mengabil daftar tugas ntuk ditampilkan 
 $(document).ready(async function () {
   let elemenDaftar = $("#daftar-tugas > thead");
   let daftartugas = await ambildaftartugas();
   let nomor = 1;
+  
+// Event listener untuk hapus tugas
+  $(".tombol-hapus").click(async function () {
+    await hapustugas($(this).attr("data-id"));
+    location.reload();
+  });
 
-export async function hapustugas(docId) {
-  await deleteDoc(doc(db, "to-di-list", docId));
-}
+  // Event listener untuk ubah tugas
+  $(".ubah").click(async function () {
+    window.location.replace("ubahtugas.html?docId=" + $(this).attr("data-id"));
+  });
+
 
 
 
