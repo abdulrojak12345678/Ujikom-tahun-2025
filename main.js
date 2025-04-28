@@ -75,6 +75,19 @@ export async function tambahtugas(tugas, status, prioritas, tanggal) {
 export async function hapustugas(docId) {
   await deleteDoc(doc(db, "to-di-list", docId));
 }
+// untuk mengubah status
+function ubahStatus(tombol) {
+  let status = tombol.dataset.status;
+
+  if (status === "Selesai") {
+    tombol.textContent = "Belum Selesai";
+    tombol.dataset.status = "Belum Selesai";
+  } else {
+    tombol.textContent = "Selesai";
+    tombol.dataset.status = "Selesai";
+  }
+}
+
 
 // untuk mengabil daftar tugas ntuk ditampilkan 
 $(document).ready(async function () {
@@ -82,7 +95,9 @@ $(document).ready(async function () {
   let daftartugas = await ambildaftartugas();
   let nomor = 1;
 
-
+export async function hapustugas(docId) {
+  await deleteDoc(doc(db, "to-di-list", docId));
+}
 
 
 
