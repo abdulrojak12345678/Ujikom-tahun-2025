@@ -81,7 +81,7 @@
    </table>
    
 <script type="module">
-  import { ambildaftartugas,hapustugas } from './main.js';
+  import { ambildaftartugas, hapustugas, } from './main.js';
 
   $(document).ready(async function () {
     let elemenDaftar = $("#daftar-tugas > thead");
@@ -110,7 +110,7 @@
       );
       nomor++;
     });
-    ('.tombol-hapus').click(async function () {
+    $('.tombol-hapus').click(async function () {
       await hapustugas($(this).attr('data'));
       location.reload();
     });
