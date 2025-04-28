@@ -31,8 +31,20 @@
        </tr>
      </thead>
    </table>
-  <p>Nothing to see here...</p>
+   
   <!-- Project -->
-  <script src="main.js"></script>
+  <script type="module">
+    import { ambildaftartugas, hapustugas, ubahStatusTugas } from './main.js';
+    $(document).ready(async function () {
+    let elemenDaftar = $("#daftar-tugas > thead");
+    let daftartugas = await ambildaftartugas();
+
+    // Sorting: selesai ke bawah
+    let tugasBelumSelesai = daftartugas.filter(data => data.status !== "selesai");
+    let tugasSelesai = daftartugas.filter(data => data.status === "selesai");
+    let tugasTersortir = [...tugasBelumSelesai, ...tugasSelesai];
+
+    let nomor = 1;
+  </script>
 </body>
 </html>
