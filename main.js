@@ -73,6 +73,12 @@ export async function tambahtugas(tugas, status, prioritas, tanggal) {
   }
 }
 
+// untuk mengabil daftar tugas ntuk ditampilkan 
+$(document).ready(async function () {
+  let elemenDaftar = $("#daftar-tugas > thead");
+  let daftartugas = await ambildaftartugas();
+  let nomor = 1;
+
 
 
 
