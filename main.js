@@ -53,6 +53,11 @@ export async function ambildaftartugas() {
     location.reload();
   });
   
+    // Event listener untuk ubah tugas
+  $(".ubah").click(async function () {
+    window.location.replace("ubahtugas.html?docId=" + $(this).attr("data-id"));
+  })
+  
   export async function tambahtugas(tugas, status, prioritas, tanggal) {
   try {
     const dokRef = await addDoc(collection(db, 'to-di-list'), {
