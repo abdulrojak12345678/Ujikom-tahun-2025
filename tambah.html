@@ -4,23 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>form tambah</title>
+  <title>form tambah</title> <!-- judul halaman -->
+    <!-- Memuat CSS Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  
+    <!-- Memuat jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  
+    <!-- Memuat JavaScript Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
+<!-- memuat css tambahan -->
 <link rel="stylesheet" href="style.css">
 
 <body>
-  <h1>form tambah tugas</h1>
+  <h1>form tambah tugas</h1> <!-- judul utama halaman -->
+    <!-- Menu navigasi dropdown -->
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="fanjusllse">
       menu
     </button>
     <ul class="dropdown-menu dropdown-menu-dark">
       <li><a class="dropdown-item active" href="index.html">back</a></li>
+      <!-- Form input tugas baru -->
   </div <form class="mb-3">
   <div class="mb-3">
     <label class="form-label">tugas</label>
@@ -47,20 +51,24 @@
       <input type="date" class="form-control" id="input-tanggal">
     </div>
     
-    <button type="submit" class="btn btn-primary" id="tombol-tambah">Simpan</button>
+    <button type="submit" class="btn btn-primary" id="tombol-tambah">Simpan</button> <!-- Tombol simpan tugas -->
   </form>
-  
+    <!-- Script untuk menyimpan data tugas baru -->
   <script type="module">
     import { tambahtugas } from './main.js';
-    
+     // Import fungsi dari main.js
+     
+     // Ambil elemen-elemen input dari form
     let tomboltambah = document.getElementById('tombol-tambah');
     let elementugas = document.getElementById('input-tugas');
     let elemenstatus = document.getElementById('input-status');
     let elemenprioritas = document.getElementById('input-prioritas');
     let elementanggal = document.getElementById('input-tanggal');
-    
+    // Event handler ketika tombol tambah diklik
     tomboltambah.addEventListener('click', async function(e) {
-      e.preventDefault();
+      e.preventDefault();// Mencegah reload halaman
+
+      // Validasi input form
       if (
         elementugas.value.trim() === '' ||
         elemenstatus.value === 'status' ||
@@ -70,9 +78,12 @@
         alert('Semua field harus diisi dengan benar!');
         return;
       }
+     // Panggil fungsi untuk menambahkan data ke Firestore
       await tambahtugas(elementugas.value, elemenstatus.value, elemenprioritas.value, elementanggal.value);
       window.location.href = 'index.html'
     })
+    // Redirect ke halaman utama setelah berhasil
+    });
   </script>
 </body>
 
