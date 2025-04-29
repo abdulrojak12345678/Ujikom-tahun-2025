@@ -80,3 +80,10 @@ export async function ubahtugas(docId, tugas, status, prioritas, tanggal) {
     tanggal: tanggal,
   });
 }
+// untuk mengambil daftar tugas ke firebase
+export async function ambiltugas(docId) {
+  const docRef = await doc(db, "to-di-list", docId);
+  const docSnap = await getDoc(docRef);
+
+  return await docSnap.data();
+}
