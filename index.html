@@ -90,12 +90,13 @@
 <script type="module">
 // Import fungsi dari file eksternal
   import { ambildaftartugas, hapustugas, ubahtugas, ubahStatusTugas } from './main.js';
-
+ // Fungsi dijalankan setelah halaman siap
   $(document).ready(async function () {
     let elemenDaftar = $("#daftar-tugas > thead");
-    let daftartugas = await ambildaftartugas();
+    // Target elemen tabel
+    let daftartugas = await ambildaftartugas();// Ambil data tugas dari sumber eksternal
 
-    // Sorting: selesai ke bawah
+    // Sorting: selesai ke bawah, Filter tugas yang belum selesai dan yang sudah selesai
     let tugasBelumSelesai = daftartugas.filter(data => data.status !== "selesai");
     let tugasSelesai = daftartugas.filter(data => data.status === "selesai");
     let tugasTersortir = [...tugasBelumSelesai, ...tugasSelesai];
