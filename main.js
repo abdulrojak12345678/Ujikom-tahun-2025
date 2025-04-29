@@ -87,3 +87,47 @@ export async function ambiltugas(docId) {
 
   return await docSnap.data();
 }
+
+// Gunakan event delegation agar berfungsi pada elemen dinamis
+$(document).on("click", ".btn-status", function () {
+  let tugasId = $(this).attr("data-id");
+  let statusSekarang = $(this).attr("data-status");
+  let statusBaru;
+
+  if (statusSekarang === "Belum Selesai") {
+    statusBaru = "Selesai";
+  } else {
+    statusBaru = "Belum Selesai";
+  }
+  // Update tampilan tombol
+  $(this).attr("data-status", statusBaru);
+  $(this).text(statusBaru);
+  updateWarnaStatus($(this), statusBaru);
+
+  // Tambahkan kode AJAX jika ingin menyimpan perubahan status ke database
+  console.log(`Status tugas ID ${tugasId} diubah menjadi ${statusBaru}`);
+  
+});
+// Fungsi untuk memperbarui warna tombol berdasarkan status
+function updateWarnaStatus(button, status) {
+  if (status === "Belum Selesai") {
+    button.css("background-color", "#dc3545").css("color", "white");
+  } else if (status === "Selesai") {
+    button.css("background-color", "#ffc107").css("color", "black");
+  } else {
+    button.css("background-color", "#28a745").css("color", "white");
+  }
+}
+
+// Atur warna status setelah halaman dimuat
+$(document).ready(function () {
+  $(".btn-status").each(function () {
+    updateWarnaStatus($(this), $(this).attr("data-status"));
+  });
+});
+export async function ubahStatusTugas(id, statusBaru) {
+//  const db = firebase.firestore(); // atau sesuai dengan cara kamu ambil DB
+  await updateDoc(doc(db, "to-di-list", id), {
+      status: statusBaru,
+  });
+}
