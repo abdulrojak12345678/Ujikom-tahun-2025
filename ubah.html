@@ -52,7 +52,7 @@
     <button type="submit" class="btn btn-primary" id="tombol-ubah">Ubah</button>
   </form>
   <script type="module">
-    import { ambiltugas, ubahtugas } from './main.js';
+    import { ambildaftartugas, ubahtugas } from './main.js';
     
     let tombolubah = document.getElementById('tombol-ubah');
     let elementugas = document.getElementById('input-tugas');
@@ -65,7 +65,7 @@
       const parameterURL = new URLSearchParams(queryString);
       const docId = parameterURL.get('docId');
       
-      const Absensi = await ambilDaftartugas(docId);
+      const Absensi = await ambiltugas(docId);
       tombolubah.addEventListener('click', async function(el) {
         el.preventDefault();
         await ubahtugas(docId, elementugas.value, elemenstatus.value, elemenprioritas.value, elementanggal.value);
