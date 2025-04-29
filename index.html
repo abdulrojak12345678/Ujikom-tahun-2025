@@ -64,13 +64,15 @@
    <h1>
      tugas harian siswa smk plus insan cemerlang 
    </h1>
+   <!-- navisagi menu dropdown -->
    <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="fanjusllse">
     menu
   </button>
   <ul class="dropdown-menu dropdown-menu-dark">
-    <li><a class="dropdown-item active" href="tambah.html">Tambah tugas</a></li>
+    <li><a class="dropdown-item active" href="tambah.html">Tambah tugas</a></li> <!-- Link ke halaman tambah -->
 </div>
+<!-- Tabel daftar tugas -->
    <table class="table" id="daftar-tugas">
      <thead>
        <tr>
@@ -84,8 +86,9 @@
        </tr>
      </thead>
    </table>
-   
+   <!-- Script dengan module -->
 <script type="module">
+// Import fungsi dari file eksternal
   import { ambildaftartugas, hapustugas, ubahtugas, ubahStatusTugas } from './main.js';
 
   $(document).ready(async function () {
