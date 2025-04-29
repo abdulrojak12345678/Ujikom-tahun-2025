@@ -61,11 +61,18 @@
     let elementanggal = document.getElementById('input-tanggal');
     
     async function init() {
-      const queryString = window.location.search;
-      const parameterURL = new URLSearchParams(queryString);
-      const docId = parameterURL.get('docId');
-      
-      const Absensi = await ambiltugas(docId);
+  const queryString = window.location.search;
+  const parameterURL = new URLSearchParams(queryString);
+  const docId = parameterURL.get('docId');
+
+  const Absensi = await ambiltugas(docId);
+
+  elementugas.value = Absensi.tugas;
+  elemenstatus.value = Absensi.status;
+  elemenprioritas.value = Absensi.prioritas;
+  elementanggal.value = Absensi.tanggal;
+
+
       tombolubah.addEventListener('click', async function(el) {
         el.preventDefault();
         await ubahtugas(docId, elementugas.value, elemenstatus.value, elemenprioritas.value, elementanggal.value);
