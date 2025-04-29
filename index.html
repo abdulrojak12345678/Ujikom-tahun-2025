@@ -81,7 +81,7 @@
    </table>
    
 <script type="module">
-  import { ambildaftartugas, hapustugas, } from './main.js';
+  import { ambildaftartugas, hapustugas, ubahtugas, } from './main.js';
 
   $(document).ready(async function () {
     let elemenDaftar = $("#daftar-tugas > thead");
@@ -116,7 +116,7 @@
     });
         // Ubah
     $('.ubah').click(function () {
-      window.location.replace('ubahtugas.html?docId=' + $(this).attr('data'));
+      window.location.replace('ubah.html?docId=' + $(this).attr('data'));
     });
   });
 </script>

@@ -55,9 +55,9 @@ export async function ambildaftartugas() {
   
     // Event listener untuk ubah tugas
   $(".ubah").click(async function () {
-    window.location.replace("ubahtugas.html?docId=" + $(this).attr("data-id"));
+    window.location.replace("ubah.html?docId=" + $(this).attr("data-id"));
   })
-  
+  // untuk tambah tugas
   export async function tambahtugas(tugas, status, prioritas, tanggal) {
   try {
     const dokRef = await addDoc(collection(db, 'to-di-list'), {
@@ -70,4 +70,13 @@ export async function ambildaftartugas() {
   } catch (e) {
     console.log('gagal menambah tugas ' + e);
   }
+}
+// mengubah tugas dan mengupdate kembali ke firebase
+export async function ubahtugas(docId, tugas, status, prioritas, tanggal) {
+  await updateDoc(doc(db, "to-di-list", docId), {
+    tugas: tugas,
+    status: status,
+    prioritas: prioritas,
+    tanggal: tanggal,
+  });
 }
