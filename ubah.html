@@ -4,26 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FORM UBAH TUGAS</title>
+  <title>FORM UBAH TUGAS</title> <!-- judul halaman -->
+   <!-- Mengimpor CSS Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  
+      <!-- Mengimpor JavaScript Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   
   
-  
+    <!-- Mengimpor jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  
+  <!-- Import CSS eksternal -->
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="m-4">
-  <h1>Ubah tugas</h1>
+<body class="m-4"><!-- margin 4 sisi -->
+  <h1>Ubah tugas</h1> <!-- judul halaman -->
+  <!-- Menu dropdown kembali -->
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="fanjusllse">
       menu
     </button>
     <ul class="dropdown-menu dropdown-menu-dark">
       <li><a class="dropdown-item active" href="index.html">back</a></li>
+      <!-- Form untuk mengubah tugas -->
   </div <form class="mb-3">
   <div class="mb-3">
     <label class="form-label">tugas</label>
@@ -49,38 +52,45 @@
       <label class="form-label">tanggal</label>
       <input type="date" class="form-control" id="input-tanggal">
     </div>
-    <button type="submit" class="btn btn-primary" id="tombol-ubah">Ubah</button>
+    <button type="submit" class="btn btn-primary" id="tombol-ubah">Ubah</button> <!-- Tombol simpan perubahan -->
   </form>
+  <!-- Script untuk inisialisasi form ubah -->
   <script type="module">
+    // Import fungsi dari main.js
     import { ambiltugas, ubahtugas } from './main.js';
     
+    
+    // Ambil elemen form input
     let tombolubah = document.getElementById('tombol-ubah');
     let elementugas = document.getElementById('input-tugas');
     let elemenstatus = document.getElementById('input-status');
     let elemenprioritas = document.getElementById('input-prioritas');
     let elementanggal = document.getElementById('input-tanggal');
     
+    // Fungsi inisialisasi halaman
     async function init() {
-  const queryString = window.location.search;
-  const parameterURL = new URLSearchParams(queryString);
-  const docId = parameterURL.get('docId');
-
-  const Absensi = await ambiltugas(docId);
-
-  elementugas.value = Absensi.tugas;
-  elemenstatus.value = Absensi.status;
-  elemenprioritas.value = Absensi.prioritas;
-  elementanggal.value = Absensi.tanggal;
-
-
+      const queryString = window.location.search; // Ambil parameter URL
+      const parameterURL = new URLSearchParams(queryString);
+      const docId = parameterURL.get('docId'); // Ambil docId dari URL
+      
+      const Absensi = await ambiltugas(docId);
+      // Ambil data tugas dari Firestore
+      
+      // Set nilai input sesuai data
+      elementugas.value = Absensi.tugas;
+      elemenstatus.value = Absensi.status;
+      elemenprioritas.value = Absensi.prioritas;
+      elementanggal.value = Absensi.tanggal;
+      
+      // Event handler untuk tombol ubah
       tombolubah.addEventListener('click', async function(el) {
-        el.preventDefault();
+        el.preventDefault(); // Mencegah reload halaman
         await ubahtugas(docId, elementugas.value, elemenstatus.value, elemenprioritas.value, elementanggal.value);
-        window.location.href = 'index.html';
+        window.location.href = 'index.html'; // Kembali ke halaman utama setelah ubah
       });
     }
     
-    init();
+    init(); // Jalankan fungsi saat halaman dimuat
   </script>
 </body>
 
