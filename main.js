@@ -1,3 +1,4 @@
+// Mengimpor konfigurasi Firebase dari CDN
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
   getFirestore,
@@ -21,10 +22,10 @@ const firebaseConfig = {
   appId: "1:1096016420480:web:87611389fc765e7ddbd065",
   measurementId: "G-DW23S2DXCR"
 };
-
+// Inisialisasi aplikasi Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-// untuk mengexport ke firebase
+// Mengambil semua daftar tugas dari koleksi "to-di-list"
 export async function ambildaftartugas() {
   const refDokumen = collection(db, "to-di-list");
   const kueri = query(refDokumen, orderBy("tugas"));
@@ -47,7 +48,7 @@ export async function ambildaftartugas() {
  export async function hapustugas(docId) {
   await deleteDoc(doc(db, "to-di-list", docId));
 }
- // Event listener untuk hapus tugas
+// Menghapus dokumen tugas berdasarkan ID
   $(".tombol-hapus").click(async function () {
     await hapustugas($(this).attr("data-id"));
     location.reload();
@@ -57,7 +58,7 @@ export async function ambildaftartugas() {
   $(".ubah").click(async function () {
     window.location.replace("ubah.html?docId=" + $(this).attr("data-id"));
   })
-  // untuk tambah tugas
+  // untuk Menambahkan dokumen tugas baru ke Firestore
   export async function tambahtugas(tugas, status, prioritas, tanggal) {
   try {
     const dokRef = await addDoc(collection(db, 'to-di-list'), {
@@ -71,7 +72,8 @@ export async function ambildaftartugas() {
     console.log('gagal menambah tugas ' + e);
   }
 }
-// mengubah tugas dan mengupdate kembali ke firebase
+
+// Mengubah data tugas berdasarkan ID
 export async function ubahtugas(docId, tugas, status, prioritas, tanggal) {
   await updateDoc(doc(db, "to-di-list", docId), {
     tugas: tugas,
@@ -80,7 +82,7 @@ export async function ubahtugas(docId, tugas, status, prioritas, tanggal) {
     tanggal: tanggal,
   });
 }
-// untuk mengambil daftar tugas ke firebase
+// Mengambil data tugas tertentu berdasarkan ID
 export async function ambiltugas(docId) {
   const docRef = await doc(db, "to-di-list", docId);
   const docSnap = await getDoc(docRef);
@@ -125,6 +127,7 @@ $(document).ready(function () {
     updateWarnaStatus($(this), $(this).attr("data-status"));
   });
 });
+// Mengubah status tugas di database
 export async function ubahStatusTugas(id, statusBaru) {
 //  const db = firebase.firestore(); // atau sesuai dengan cara kamu ambil DB
   await updateDoc(doc(db, "to-di-list", id), {
