@@ -1,78 +1,75 @@
  <!DOCTYPE html>
  <html lang="en">
-
+ 
  <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+   
    <title>To-Do List</title>
-
+   
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+   
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-
-
+   
+   
+   
    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+   
    <link rel="stylesheet" href="style.css">
  </head>
-
+ 
  <body>
-
-     <style>
-     <---->
-    <style>
-     <---->
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    
-    header {
-      background-color:  ;
-      padding: 0px;
-      text-align: center;
-    }
-    
-    img {
-      max-width: 100%;
-      height: 100%;
-      
-      
-    }
-    
-    body {
-      background-color: aliceblue;
-    }
-    
-    h1 {
-      color: black;
-    }
-  </style>
-      color: black;
-    }
-  </style>
+   
+   <style>
+     <----><style><---->body {
+       font-family: Arial, sans-serif;
+       margin: 0;
+       padding: 0;
+     }
+     
+     header {
+       background-color: ;
+       padding: 0px;
+       text-align: center;
+     }
+     
+     img {
+       max-width: 100%;
+       height: 100%;
+       
+       
+     }
+     
+     body {
+       background-color: aliceblue;
+     }
+     
+     h1 {
+       color: black;
+     }
+   </style>
+   color: black;
+   }
+   </style>
    <header>
      
-   <img src="gambar.png" alt="Gambar Header" class="header-image"/>
-    
+     <img src="gambar.png" alt="Gambar Header" class="header-image" />
+     
    </header>
-
+   
    <h1>
-     tugas harian siswa smk plus insan cemerlang 
+     tugas harian siswa smk plus insan cemerlang
    </h1>
    <!-- navisagi menu dropdown -->
    <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="fanjusllse">
-    menu
-  </button>
-  <ul class="dropdown-menu dropdown-menu-dark">
-    <li><a class="dropdown-item active" href="tambah.html">Tambah tugas</a></li> <!-- Link ke halaman tambah -->
-</div>
-<!-- Tabel daftar tugas -->
+     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="fanjusllse">
+       menu
+     </button>
+     <ul class="dropdown-menu dropdown-menu-dark">
+       <li><a class="dropdown-item active" href="tambah.html">Tambah tugas</a></li> <!-- Link ke halaman tambah -->
+   </div>
+   <!-- Tabel daftar tugas -->
    <table class="table" id="daftar-tugas">
      <thead>
        <tr>
@@ -87,74 +84,79 @@
      </thead>
    </table>
    <!-- Script dengan module -->
-<script type="module">
-// Import fungsi dari file eksternal
-  import { ambildaftartugas, hapustugas, ubahtugas, ubahStatusTugas } from './main.js';
- // Fungsi dijalankan setelah halaman siap
-  $(document).ready(async function () {
-    let elemenDaftar = $("#daftar-tugas > thead");
-    // Target elemen tabel
-    let daftartugas = await ambildaftartugas();// Ambil data tugas dari sumber eksternal
-
-    // Sorting: selesai ke bawah, Filter tugas yang belum selesai dan yang sudah selesai
-    let tugasBelumSelesai = daftartugas.filter(data => data.status !== "selesai");
-    let tugasSelesai = daftartugas.filter(data => data.status === "selesai");
-    let tugasTersortir = [...tugasBelumSelesai, ...tugasSelesai];
-
-    let nomor = 1;
-    tugasTersortir.forEach((data) => {
-   //   console.log(data);
-      elemenDaftar.append(
-        '<tr>' +
-        '<th>' + nomor + '</th>' +
-        '<td>' + data.tugas + '</td>' +
-        '<td>' +
-        `<button class="btn btn-sm btn-status btn-outline-secondary" data-status="${data.status}" data-id="${data.id}">${data.status}</button>` +
-        '</td>' +
-        '<td>' + data.prioritas + '</td>' +
-        '<td>' + data.tanggal + '</td>' +
-        '<td> <button class="btn btn-warning ubah" data="' + data.id + '">Ubah</button></td>' +
-        '<td> <a href="#" class="btn btn-danger tombol-hapus" data="' + data.id + '">Hapus</a></td>' +
-        '</tr>'
-      );
-      nomor++;
-    });
-    $('.tombol-hapus').click(async function () {
-      await hapustugas($(this).attr('data'));
-      location.reload();
-    });
-        // Ubah
-    $('.ubah').click(function () {
-      window.location.replace('ubah.html?docId=' + $(this).attr('data'));
-    });
-        // Ubah status
-    $('.btn-status').click(async function () {
-      const id = $(this).attr('data-id');
-      const statusSekarang = $(this).attr('data-status');
-      console.log('status saat ini', statusSekarang);
-      const statusBaru = 'selesai'; 
-      // atau bisa toggle jika ingin interaktif
-console.log('status baru', statusBaru);
-      if (statusSekarang !== 'selesai') {console.log('status saat ini', statusSekarang);
-        await ubahStatusTugas(id, statusBaru);
-     location.reload();
-      }
-    });
-  });
-</script>
-
+   <script type="module">
+     // Import fungsi dari file eksternal
+     import { ambildaftartugas, hapustugas, ubahtugas, ubahStatusTugas } from './main.js';
+     // Fungsi dijalankan setelah halaman siap
+     $(document).ready(async function() {
+       let elemenDaftar = $("#daftar-tugas > thead");
+       // Target elemen tabel
+       let daftartugas = await ambildaftartugas(); // Ambil data tugas dari sumber eksternal
+       
+       // Sorting: selesai ke bawah, Filter tugas yang belum selesai dan yang sudah selesai
+       let tugasBelumSelesai = daftartugas.filter(data => data.status !== "selesai");
+       let tugasSelesai = daftartugas.filter(data => data.status === "selesai");
+       let tugasTersortir = [...tugasBelumSelesai, ...tugasSelesai]; // Gabungkan urutan
+       
+       let nomor = 1;
+       tugasTersortir.forEach((data) => {
+         //   console.log(data);
+         // Tambahkan baris ke tabel
+         elemenDaftar.append(
+           '<tr>' +
+           '<th>' + nomor + '</th>' +
+           '<td>' + data.tugas + '</td>' +
+           '<td>' +
+           `<button class="btn btn-sm btn-status btn-outline-secondary" data-status="${data.status}" data-id="${data.id}">${data.status}</button>` +
+           '</td>' +
+           '<td>' + data.prioritas + '</td>' +
+           '<td>' + data.tanggal + '</td>' +
+           '<td> <button class="btn btn-warning ubah" data="' + data.id + '">Ubah</button></td>' +
+           '<td> <a href="#" class="btn btn-danger tombol-hapus" data="' + data.id + '">Hapus</a></td>' +
+           '</tr>'
+         );
+         nomor++;
+       });
+       // Event handler tombol hapus
+       $('.tombol-hapus').click(async function() {
+         await hapustugas($(this).attr('data')); // Hapus berdasarkan ID
+         location.reload(); 
+       });
+       // Event handler tombol ubah
+       $('.ubah').click(function() {
+         window.location.replace('ubah.html?docId=' + $(this).attr('data')); // Arahkan ke halaman ubah dengan ID
+       });
+       // Ubah status// Event handler ubah status tugas
+       $('.btn-status').click(async function() {
+         const id = $(this).attr('data-id');// Arahkan ke halaman ubah dengan ID
+         const statusSekarang = $(this).attr('data-status');// Ambil status sekarang
+         console.log('status saat ini', statusSekarang);// Ambil status sekarang
+         const statusBaru = 'selesai';
+        // Status baru yang diinginkan
+         console.log('status baru', statusBaru);
+         if (statusSekarang !== 'selesai') {
+           console.log('status saat ini', statusSekarang);
+           await ubahStatusTugas(id, statusBaru);
+           //Update status
+           location.reload(); // muat ulang 
+         }
+       });
+     });
+   </script>
    
-  <footer class="py-3 bg-dark-subtle mt-auto">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-
-      </ul>
-      <p class="text-center text-body-secondary">&copy; SMK PLUS INSAN CEMERLANG 2024
-        # to-do-list </p>
-    </footer>
-    
-
-
-
+   <!-- footer --->
+     
+   </footer>>
+   <footer class="py-3 bg-dark-subtle mt-auto">
+     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+     </ul>
+     <p class="text-center text-body-secondary">&copy; SMK PLUS INSAN CEMERLANG 2024
+       # to-do-list </p>
+   </footer>
+   
+   
+   
+   
  </body>
-
+ 
  </html>
