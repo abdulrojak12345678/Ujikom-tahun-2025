@@ -1,6 +1,6 @@
 /* Background dan font umum untuk seluruh halaman */
 body {
-  background: url('') no-repeat center center fixed; /* Gambar latar tetap di tengah layar */
+  background: url('animasi.jpg') no-repeat center center fixed; /* Gambar latar tetap di tengah layar */
   background-size: cover; /* Gambar latar memenuhi seluruh layar */
   color: black; /* Warna teks default */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font utama */
